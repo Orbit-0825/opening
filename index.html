@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBS컴퓨터아트학원 안산점 개강안내</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --surface: #181818;
+    --card: #1e1e1e;
+    --border: #2c2c2c;
+    --accent: #f5c400;
+    --text: #efefef;
+    --muted: #777;
+    --green: #3dba74;
+    --tag-bg: #252525;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', sans-serif; }
+
+  header {
+    background: #111;
+    border-bottom: 2px solid var(--accent);
+    padding: 1.2rem 2rem;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner {
+    max-width: 1440px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  }
+  .logo h1 { font-size: 1.1rem; font-weight: 900; color: var(--accent); letter-spacing: -0.02em; }
+  .logo p { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
+
+  .controls { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+  .search-wrap { position: relative; }
+  .search-wrap input {
+    background: var(--card); border: 1px solid var(--border); color: var(--text);
+    padding: 0.45rem 0.9rem 0.45rem 2rem; border-radius: 6px;
+    font-family: 'Noto Sans KR', sans-serif; font-size: 0.82rem; outline: none; width: 180px;
+    transition: border-color 0.2s;
+  }
+  .search-wrap::before {
+    content: '🔍'; position: absolute; left: 0.55rem; top: 50%; transform: translateY(-50%);
+    font-size: 0.75rem; pointer-events: none;
+  }
+  .search-wrap input:focus { border-color: var(--accent); }
+
+  .filters { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+  .fbtn {
+    background: var(--card); border: 1px solid var(--border); color: var(--muted);
+    padding: 0.4rem 0.75rem; border-radius: 5px; cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif; font-size: 0.78rem; font-weight: 700;
+    transition: all 0.15s; white-space: nowrap;
+  }
+  .fbtn.active, .fbtn:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+
+  /* 평일/주말 탭 */
+  .mode-tabs {
+    max-width: 1440px; margin: 0 auto;
+    display: flex; gap: 0; padding: 1.2rem 2rem 0;
+  }
+  .mode-tab {
+    padding: 0.6rem 2rem; cursor: pointer; font-weight: 700; font-size: 0.88rem;
+    border: 2px solid var(--border); background: var(--card); color: var(--muted);
+    font-family: 'Noto Sans KR', sans-serif; transition: all 0.15s;
+  }
+  .mode-tab:first-child { border-radius: 8px 0 0 0; }
+  .mode-tab:last-child  { border-radius: 0 8px 0 0; border-left: none; }
+  .mode-tab:not(:first-child) { border-left: none; }
+  .mode-tab.active { background: var(--accent); color: #000; border-color: var(--accent); }
+
+  main { max-width: 1440px; margin: 0 auto; padding: 1.2rem 2rem 1.5rem; }
+
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1.2rem; flex-wrap: wrap; gap: 0.8rem;
+  }
+  .count-text { font-size: 0.82rem; color: var(--muted); }
+  .count-text strong { color: var(--accent); font-size: 1rem; }
+
+  .copy-all {
+    background: var(--accent); color: #000; border: none;
+    padding: 0.55rem 1.2rem; border-radius: 7px; cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif; font-size: 0.82rem; font-weight: 700;
+    transition: all 0.2s;
+  }
+  .copy-all:hover { background: #e6b800; }
+  .copy-all.copied { background: var(--green); color: #fff; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1rem;
+  }
+
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    overflow: hidden; transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    display: flex; flex-direction: column;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.4); border-color: #383838; }
+
+  .card-top {
+    padding: 0.9rem 1.1rem 0.7rem;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 0.6rem;
+  }
+  .card-subject { font-weight: 700; font-size: 0.97rem; line-height: 1.35; }
+  .card-days {
+    font-size: 0.7rem; color: var(--muted); background: var(--tag-bg);
+    border-radius: 4px; padding: 0.15rem 0.45rem; margin-top: 0.3rem; display: inline-block;
+  }
+  .room-tag {
+    background: var(--accent); color: #000; font-size: 0.68rem; font-weight: 900;
+    padding: 0.2rem 0.5rem; border-radius: 4px; white-space: nowrap; flex-shrink: 0; margin-top: 0.1rem;
+  }
+
+  .card-body { padding: 0.85rem 1.1rem; flex: 1; }
+  .info { display: flex; font-size: 0.8rem; margin-bottom: 0.3rem; gap: 0.5rem; }
+  .info-k { color: var(--muted); flex-shrink: 0; width: 64px; white-space: nowrap; }
+  .info-v { color: var(--text); word-break: break-all; }
+  .info-v a { color: #5b9cf6; text-decoration: none; font-size: 0.75rem; }
+  .info-v a:hover { text-decoration: underline; }
+
+  .copy-btn {
+    width: 100%; margin-top: 0.8rem;
+    background: #242424; border: 1px solid var(--border); color: var(--text);
+    padding: 0.55rem; border-radius: 7px; cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif; font-size: 0.78rem; font-weight: 600;
+    transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 0.35rem;
+  }
+  .copy-btn:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+  .copy-btn.copied { background: var(--green); color: #fff; border-color: var(--green); }
+
+  .no-result { text-align: center; color: var(--muted); padding: 4rem; font-size: 0.9rem; grid-column: 1/-1; }
+
+  /* 다중선택 */
+  .multi-btn {
+    background: #242424; border: 1px solid var(--border); color: var(--muted);
+    padding: 0.55rem 1.1rem; border-radius: 7px; cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif; font-size: 0.82rem; font-weight: 700;
+    transition: all 0.2s;
+  }
+  .multi-btn.active { background: #3a2e00; border-color: var(--accent); color: var(--accent); }
+  .multi-copy-bar {
+    display: none; align-items: center; justify-content: space-between;
+    background: #1a1a00; border: 1px solid var(--accent); border-radius: 8px;
+    padding: 0.6rem 1rem; margin-bottom: 0.8rem; gap: 0.8rem;
+  }
+  .multi-copy-bar.visible { display: flex; }
+  .multi-copy-bar .sel-count { color: var(--accent); font-size: 0.82rem; font-weight: 700; }
+  .multi-copy-bar .btn-row { display: flex; gap: 0.5rem; }
+  .multi-copy-bar button {
+    padding: 0.4rem 0.9rem; border-radius: 6px; cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif; font-size: 0.78rem; font-weight: 700; border: none;
+  }
+  .btn-do-copy { background: var(--accent); color: #000; }
+  .btn-do-copy.copied { background: var(--green); color: #fff; }
+  .btn-clear { background: #333; color: var(--muted); }
+  .card.selectable { cursor: pointer; user-select: none; }
+  .card.selectable:hover { border-color: var(--accent); }
+  .card.selected { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); background: #1e1a00; }
+  .card.selected .card-top { background: #2a2400; }
+  .check-icon { display: none; }
+
+  @media (max-width: 600px) {
+    main { padding: 1rem; }
+    header { padding: 1rem; }
+    .mode-tabs { padding: 1rem 1rem 0; }
+    .grid { grid-template-columns: 1fr; }
+    .search-wrap input { width: 140px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <h1>■ SBS컴퓨터아트학원 안산점 — 개강안내</h1>
+      <p>과목을 선택해 메시지를 복사하세요</p>
+    </div>
+    <div class="controls">
+      <div class="search-wrap">
+        <input type="text" id="searchInput" placeholder="과목명 검색" oninput="render()">
+      </div>
+      <div class="filters" id="filterBtns"></div>
+    </div>
+  </div>
+</header>
+
+<div class="mode-tabs">
+  <button class="mode-tab active" onclick="setMode('weekday8', this)">📅 8월 평일반</button>
+  <button class="mode-tab" onclick="setMode('weekend8', this)">🗓️ 8월 주말반</button>
+  <button class="mode-tab" onclick="setMode('weekday7', this)">📅 7월 평일반</button>
+  <button class="mode-tab" onclick="setMode('weekend7', this)">🗓️ 7월 주말반</button>
+</div>
+
+<main>
+  <div class="topbar">
+    <div class="count-text">총 <strong id="visibleCount">0</strong>개 과목</div>
+    <div style="display:flex;gap:0.5rem;align-items:center;">
+      <button class="multi-btn" id="multiBtn" onclick="toggleMulti()">☑️ 다중선택</button>
+      <button class="copy-all" id="copyAllBtn" onclick="copyAll(this)">📋 전체 복사</button>
+    </div>
+  </div>
+  <div class="multi-copy-bar" id="multiBar">
+    <span class="sel-count"><span id="selCount">0</span>개 선택됨</span>
+    <div class="btn-row">
+      <button class="btn-clear" onclick="clearSelection()">✕ 선택 해제</button>
+      <button class="btn-do-copy" id="doCopyBtn" onclick="copySelected(this)">📋 선택 복사</button>
+    </div>
+  </div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<script>
+const discord = {
+  A: 'https://discord.gg/UbPVxWgcct',
+  B: 'https://discord.gg/VBaPncjxXe',
+  C: 'https://discord.gg/2WcQwuzvxy',
+  D: 'https://discord.gg/bHxVuv3AxS',
+  E: 'https://discord.com/invite/Th6NfQvSHF',
+  F: 'https://discord.gg/cEDxpq6aVS',
+  G: 'https://discord.gg/KrHJzzErWt',
+  H: 'https://discord.gg/7x4cFMtgcn'
+};
+
+const weekdayCourses = [
+  // A강의장
+  { subject: '포토샵', days: '월화수목', room: 'A', time: '09:00~11:00', start: '2026-03-16', end: '2026-04-09' },
+  { subject: 'AI프롬프트엔지니어링2', days: '금', room: 'A', time: '09:00~13:00', start: '2026-03-20', end: '2026-04-10' },
+  { subject: '일러스트', days: '월화수목', room: 'A', time: '11:00~13:00', start: '2026-03-16', end: '2026-04-09' },
+  { subject: '캐드2', days: '월수금월수', room: 'A', time: '19:00~22:00', start: '2026-03-16', end: '2026-04-08' },
+  { subject: '모션PO', days: '화목화목금', room: 'A', time: '19:00~22:00', start: '2026-03-17', end: '2026-04-07' },
+  // B강의장
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '09:00~11:00', start: '2026-03-16', end: '2026-04-08' },
+  { subject: '모션 디드', days: '화목화목금', room: 'B', time: '09:00~11:00', start: '2026-03-17', end: '2026-04-07' },
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '11:00~13:00', start: '2026-03-16', end: '2026-04-08' },
+  { subject: '디지털드로잉', days: '화목화목금', room: 'B', time: '11:00~13:00', start: '2026-03-17', end: '2026-04-07' },
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '14:00~16:00', start: '2026-03-16', end: '2026-04-08' },
+  { subject: '디지털드로잉', days: '화목화목금', room: 'B', time: '14:00~16:00', start: '2026-03-17', end: '2026-04-07' },
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '18:00~20:00', start: '2026-03-16', end: '2026-04-08' },
+  { subject: '디지털드로잉', days: '화목화목금', room: 'B', time: '18:00~20:00', start: '2026-03-17', end: '2026-04-07' },
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '20:00~22:00', start: '2026-03-16', end: '2026-04-08' },
+  { subject: '디지털드로잉', days: '화목화목금', room: 'B', time: '20:00~22:00', start: '2026-03-17', end: '2026-04-07' },
+  // C강의장
+  { subject: '에펙2', days: '월화수목', room: 'C', time: '11:00~13:00', start: '2026-03-16', end: '2026-04-09' },
+  { subject: '모션그래픽(영상편집,CG) 제작과정', days: '월화수목금', room: 'C', time: '13:00~18:00', start: '2026-03-26', end: '2026-06-24' },
+  { subject: '마야4', days: '월수금월수', room: 'C', time: '19:00~22:00', start: '2026-03-16', end: '2026-04-08' },
+  { subject: '스케치업2', days: '화목화목금', room: 'C', time: '19:00~22:00', start: '2026-03-17', end: '2026-04-07' },
+  // D강의장
+  { subject: '스케치업2', days: '월화수목', room: 'D', time: '09:00~11:00', start: '2026-03-16', end: '2026-04-09' },
+  { subject: '캐드1', days: '월화수목', room: 'D', time: '11:00~13:00', start: '2026-03-16', end: '2026-04-09' },
+  { subject: 'AI크리에이터 인테리어', days: '월수', room: 'D', time: '14:00~16:00', start: '2026-03-16', end: '2026-04-08' },
+  { subject: '포토샵', days: '월수금월수', room: 'D', time: '19:00~22:00', start: '2026-03-16', end: '2026-04-08' },
+  { subject: '백엔드마스터3(자바2)', days: '화목화목금', room: 'D', time: '19:00~22:00', start: '2026-03-24', end: '2026-04-16' },
+  // E강의장
+  { subject: 'AI크리에이터 유튜브', days: '금', room: 'E', time: '09:00~11:00', start: '2026-02-13', end: '2026-04-10' },
+  { subject: '시포디3', days: '월화수목', room: 'E', time: '09:00~11:00', start: '2026-03-16', end: '2026-04-09' },
+  { subject: '에펙2', days: '월화수목', room: 'E', time: '11:00~13:00', start: '2026-03-16', end: '2026-04-09' },
+  { subject: '마야7', days: '월수금월수', room: 'E', time: '14:00~17:00', start: '2026-03-16', end: '2026-04-08' },
+  { subject: '마야PO', days: '화목화목금', room: 'E', time: '14:00~17:00', start: '2026-03-17', end: '2026-04-07' },
+  { subject: '어드벤스 시포디3', days: '월수금월수', room: 'E', time: '19:00~22:00', start: '2026-03-16', end: '2026-04-08' },
+  { subject: '마야PO', days: '화목화목금', room: 'E', time: '19:00~22:00', start: '2026-03-17', end: '2026-04-07' },
+  // F강의장
+  { subject: '웹2', days: '월화수목', room: 'F', time: '11:00~13:00', start: '2026-02-19', end: '2026-03-19' },
+  { subject: '웹3', days: '월화수목', room: 'F', time: '11:00~13:00', start: '2026-03-23', end: '2026-04-16' },
+  { subject: '플랫모션', days: '월수금월수', room: 'F', time: '14:00~16:00', start: '2026-03-16', end: '2026-04-10' },
+  { subject: 'UI/UX디자인2', days: '화목화목금', room: 'F', time: '14:00~16:00', start: '2026-03-17', end: '2026-04-09' },
+  { subject: '편집PO', days: '월수금월수', room: 'F', time: '16:00~18:00', start: '2026-03-16', end: '2026-04-10' },
+  { subject: '인테리어PO', days: '화목화목금', room: 'F', time: '16:00~18:00', start: '2026-03-17', end: '2026-04-09' },
+  { subject: '에펙1', days: '화목화목금', room: 'F', time: '19:00~22:00', start: '2026-03-17', end: '2026-04-07' },
+  { subject: '웹PO', days: '월수금월수', room: 'F', time: '19:00~22:00', start: '2026-03-23', end: '2026-04-13' },
+  // G강의장
+  { subject: '디일러', days: '월화수목', room: 'G', time: '09:00~11:00', start: '2026-03-16', end: '2026-04-09' },
+  { subject: '포토웍스', days: '월화수목', room: 'G', time: '11:00~13:00', start: '2026-03-16', end: '2026-04-09' },
+  { subject: '컴퓨터 기초수업', days: '금', room: 'G', time: '11:00~13:00', start: '2026-03-20', end: '2026-04-10' },
+  { subject: 'AI크리에이터 유튜브', days: '화목화목금', room: 'G', time: '14:00~16:00', start: '2026-03-17', end: '2026-04-09' },
+  { subject: '디일러', days: '월수금월수', room: 'G', time: '19:00~22:00', start: '2026-03-16', end: '2026-04-08' },
+  { subject: '컴활', days: '화목화목금', room: 'G', time: '19:00~22:00', start: '2026-03-17', end: '2026-04-07' },
+  // H강의장
+  { subject: '실내건축 자격증(기사)', days: '화목화목금', room: 'H', time: '11:00~13:00', start: '2026-03-17', end: '2026-04-07' },
+  { subject: '실내건축 자격증(기능사)', days: '월수금월수', room: 'H', time: '19:00~22:00', start: '2026-03-16', end: '2026-04-08' },
+];
+const weekendCourses = [
+  // B강의장
+  { subject: '디지털드로잉', days: '토일', room: 'B', time: '09:00~12:00', start: '2026-03-21', end: '2026-04-12' },
+  { subject: '유튜브 크리에이터 세미나', days: '토', room: 'E', time: '10:00~11:00', start: '2026-03-21', end: '2026-03-21' },
+  { subject: '이모티콘 제작 세미나', days: '토', room: 'B', time: '15:00~17:00', start: '2026-03-28', end: '2026-03-28' },
+  { subject: '디지털드로잉', days: '토일', room: 'B', time: '12:00~15:00', start: '2026-03-21', end: '2026-04-12' },
+  // C강의장
+  { subject: 'GTQI', days: '토일', room: 'C', time: '09:00~12:00', start: '2026-03-14', end: '2026-04-05' },
+  { subject: 'GTQ', days: '토일', room: 'C', time: '09:00~12:00', start: '2026-04-11', end: '2026-05-03' },
+  { subject: '모스', days: '토일', room: 'C', time: '12:00~15:00', start: '2026-03-14', end: '2026-04-05' },
+  { subject: '컴활/5주', days: '토일', room: 'C', time: '12:00~15:00', start: '2026-04-11', end: '2026-05-10' },
+  { subject: '실전OA2', days: '토일', room: 'C', time: '15:00~18:00', start: '2026-02-21', end: '2026-03-22' },
+  { subject: 'AI프롬프트엔지니어링1', days: '토일', room: 'C', time: '15:00~18:00', start: '2026-03-28', end: '2026-04-12' },
+  // A강의장
+  { subject: '포토샵', days: '토일', room: 'A', time: '12:00~15:00', start: '2026-03-21', end: '2026-04-12' },
+  // E강의장
+  { subject: '유크리입문', days: '토일', room: 'E', time: '12:00~15:00', start: '2026-03-21', end: '2026-04-12' },
+  { subject: '캐드1', days: '토일', room: 'E', time: '15:00~18:00', start: '2026-03-21', end: '2026-04-12' },
+  // F강의장
+  { subject: '전산회계1급', days: '토일', room: 'F', time: '12:00~15:00', start: '2026-01-31', end: '2026-03-29' },
+  { subject: '전산회계1급', days: '토일', room: 'F', time: '12:00~15:00', start: '2026-04-04', end: '2026-05-24' },
+  { subject: '전산세무2급', days: '토일', room: 'F', time: '15:00~18:00', start: '2026-01-31', end: '2026-03-29' },
+];
+
+const weekdayRooms = ['A','B','C','D','E','F','G','H'];
+const weekendRooms = ['A','B','C','E','F'];
+const weekday4Rooms = ['A','B','C','D','E','F','G','H'];
+const weekend4Rooms = ['A','B','C','D','E','F','G'];
+
+const weekday4Courses = [
+  // A강의장
+  { subject: '일러스트', days: '월화수목', room: 'A', time: '09:00~11:00', start: '2026-04-13', end: '2026-05-11' },
+  { subject: '포토샵', days: '월화수목', room: 'A', time: '11:00~13:00', start: '2026-04-13', end: '2026-05-11' },
+  { subject: '시포디1', days: '월수금월수', room: 'A', time: '19:00~22:00', start: '2026-04-13', end: '2026-05-06' },
+  { subject: '모션PO', days: '화목화목금', room: 'A', time: '19:00~22:00', start: '2026-04-14', end: '2026-05-08' },
+  // B강의장
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '09:00~11:00', start: '2026-04-13', end: '2026-05-06' },
+  { subject: '모션 디드', days: '화목화목금', room: 'B', time: '09:00~11:00', start: '2026-04-14', end: '2026-05-08' },
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '11:00~13:00', start: '2026-04-13', end: '2026-05-06' },
+  { subject: '디지털드로잉', days: '화목화목금', room: 'B', time: '11:00~13:00', start: '2026-04-14', end: '2026-05-08' },
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '14:00~16:00', start: '2026-04-13', end: '2026-05-06' },
+  { subject: '디지털드로잉', days: '화목화목금', room: 'B', time: '14:00~16:00', start: '2026-04-14', end: '2026-05-08' },
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '18:00~20:00', start: '2026-04-13', end: '2026-05-06' },
+  { subject: '디지털드로잉', days: '화목화목금', room: 'B', time: '18:00~20:00', start: '2026-04-14', end: '2026-05-08' },
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '20:00~22:00', start: '2026-04-13', end: '2026-05-06' },
+  { subject: '디지털드로잉', days: '화목화목금', room: 'B', time: '20:00~22:00', start: '2026-04-14', end: '2026-05-08' },
+  // C강의장
+  { subject: '프리미어', days: '월화수목', room: 'C', time: '11:00~13:00', start: '2026-04-13', end: '2026-05-11' },
+  { subject: '모션그래픽(영상편집,CG) 제작과정', days: '월화수목금', room: 'C', time: '13:00~18:00', start: '2026-03-26', end: '2026-06-24' },
+  { subject: '마야5', days: '월수금월수', room: 'C', time: '19:00~22:00', start: '2026-04-13', end: '2026-05-06' },
+  { subject: '에펙2', days: '화목화목금', room: 'C', time: '19:00~22:00', start: '2026-04-14', end: '2026-05-08' },
+  // D강의장
+  { subject: '스케치업3', days: '월화수목', room: 'D', time: '09:00~11:00', start: '2026-04-13', end: '2026-05-11' },
+  { subject: '캐드2', days: '월화수목', room: 'D', time: '11:00~13:00', start: '2026-04-13', end: '2026-05-11' },
+  { subject: 'AI Studio 세미나', days: '금', room: 'D', time: '11:00~13:00', start: '2026-04-17', end: '2026-04-17' },
+  { subject: '백엔드마스터3(자바2)', days: '화목화목금', room: 'D', time: '19:00~22:00', start: '2026-03-24', end: '2026-04-16' },
+  { subject: '캐드1', days: '월수금월수', room: 'D', time: '19:00~22:00', start: '2026-04-13', end: '2026-05-06' },
+  { subject: '백엔드마스터4(DB)', days: '화목화목금', room: 'D', time: '19:00~22:00', start: '2026-04-21', end: '2026-05-14' },
+  // E강의장
+  { subject: '모션PO', days: '월수금월수', room: 'E', time: '09:00~11:00', start: '2026-04-13', end: '2026-05-06' },
+  { subject: '어드벤스 시포디1', days: '화목화목금', room: 'E', time: '09:00~11:00', start: '2026-04-14', end: '2026-05-08' },
+  { subject: '프리미어', days: '월화수목', room: 'E', time: '11:00~13:00', start: '2026-04-13', end: '2026-05-11' },
+  { subject: '프리미어', days: '월화수목', room: 'E', time: '11:00~13:00', start: '2026-04-13', end: '2026-05-11' },
+  { subject: '모션에펙', days: '금', room: 'E', time: '11:00~13:00', start: '2026-04-17', end: '2026-05-08' },
+  { subject: '지브러쉬 세미나', days: '금', room: 'E', time: '11:00~13:00', start: '2026-04-24', end: '2026-04-24' },
+  { subject: '마야8', days: '월수금월수', room: 'E', time: '14:00~16:00', start: '2026-04-13', end: '2026-05-06' },
+  { subject: '마야PO', days: '화목화목금', room: 'E', time: '14:00~16:00', start: '2026-04-14', end: '2026-05-08' },
+  { subject: '일러스트', days: '월수금월수', room: 'E', time: '19:00~22:00', start: '2026-04-13', end: '2026-05-06' },
+  { subject: '스케치업3', days: '화목화목금', room: 'E', time: '19:00~22:00', start: '2026-04-14', end: '2026-05-08' },
+  // F강의장
+  { subject: '웹3', days: '월화수목', room: 'F', time: '11:00~13:00', start: '2026-03-23', end: '2026-04-16' },
+  { subject: '웹PO', days: '월화수목금', room: 'F', time: '11:00~13:00', start: '2026-04-20', end: '2026-05-18' },
+  { subject: '인디자인', days: '월수금월수', room: 'F', time: '14:00~16:00', start: '2026-04-13', end: '2026-05-11' },
+  { subject: '그래픽아트웍', days: '화목화목금', room: 'F', time: '14:00~16:00', start: '2026-04-14', end: '2026-05-12' },
+  { subject: '인테리어PO', days: '화목화목금', room: 'F', time: '16:00~18:00', start: '2026-04-14', end: '2026-05-12' },
+  { subject: '마야PO', days: '화목화목금', room: 'F', time: '19:00~22:00', start: '2026-04-14', end: '2026-05-08' },
+  { subject: '웹1', days: '월수금월수', room: 'F', time: '19:00~22:00', start: '2026-04-20', end: '2026-05-15' },
+  // G강의장
+  { subject: '포토웍스', days: '월화수목', room: 'G', time: '09:00~11:00', start: '2026-04-13', end: '2026-05-11' },
+  { subject: '디일러', days: '월화수목', room: 'G', time: '11:00~13:00', start: '2026-04-13', end: '2026-05-11' },
+  { subject: '포토웍스', days: '월수금월수', room: 'G', time: '19:00~22:00', start: '2026-04-13', end: '2026-05-06' },
+  { subject: '모스', days: '화목화목금', room: 'G', time: '19:00~22:00', start: '2026-04-14', end: '2026-05-08' },
+  // H강의장
+  { subject: '실내건축 자격증(기사)', days: '화목화목금', room: 'H', time: '11:00~13:00', start: '2026-04-14', end: '2026-05-08' },
+  { subject: '실내건축 자격증(기능사)', days: '월수금월수', room: 'H', time: '19:00~22:00', start: '2026-04-13', end: '2026-05-06' },
+  { subject: '실내건축 자격증(기사)', days: '화목화목금', room: 'H', time: '19:00~22:00', start: '2026-04-14', end: '2026-05-08' },
+];
+
+const weekend4Courses = [
+  // A강의장
+  { subject: '일러스트', days: '토/일', room: 'A', time: '12:00~15:00', start: '2026-04-18', end: '2026-05-10' },
+  // B강의장
+  { subject: '디지털드로잉', days: '토/일', room: 'B', time: '09:00~12:00', start: '2026-04-18', end: '2026-05-10' },
+  { subject: '디지털드로잉', days: '토/일', room: 'B', time: '12:00~15:00', start: '2026-04-18', end: '2026-05-10' },
+  // C강의장
+  { subject: 'GTQ', days: '토/일', room: 'C', time: '09:00~12:00', start: '2026-04-11', end: '2026-05-03' },
+  { subject: '컴활/5주', days: '토/일', room: 'C', time: '12:00~15:00', start: '2026-04-11', end: '2026-05-10' },
+  { subject: 'AI프롬프트엔지니어링2', days: '토/일', room: 'C', time: '15:00~18:00', start: '2026-04-18', end: '2026-05-03' },
+  // D강의장
+  { subject: '파이썬', days: '토/일', room: 'D', time: '09:00~12:00', start: '2026-03-28', end: '2026-04-19' },
+  // E강의장
+  { subject: '유크리기초', days: '토/일', room: 'E', time: '09:00~12:00', start: '2026-04-18', end: '2026-05-10' },
+  { subject: '유크리심화', days: '토/일', room: 'E', time: '12:00~15:00', start: '2026-04-18', end: '2026-05-10' },
+  { subject: '캐드2', days: '토/일', room: 'E', time: '15:00~18:00', start: '2026-04-18', end: '2026-05-10' },
+  // F강의장
+  { subject: '전산회계1급', days: '토/일', room: 'F', time: '12:00~15:00', start: '2026-04-04', end: '2026-05-24' },
+  // G강의장
+  { subject: '전산응용기계제도', days: '토/일', room: 'G', time: '09:00~13:00', start: '2026-04-18', end: '2026-05-24' },
+  { subject: '전산응용건축제도', days: '토/일', room: 'G', time: '13:00~17:00', start: '2026-05-02', end: '2026-05-24' },
+];
+
+const weekday7Rooms = ['A','B','C','D','E','F','G','H'];
+const weekend7Rooms = ['A','B','C','D','E','F','G','H'];
+
+const weekday7Courses = [
+  // A강의장
+  { subject: '포토샵', days: '월화수목', room: 'A', time: '09:00~11:00', start: '2026-07-14', end: '2026-08-10' },
+  { subject: '일러스트', days: '월화수목', room: 'A', time: '11:00~13:00', start: '2026-07-14', end: '2026-08-10' },
+  { subject: '캐드1/방학', days: '월화수목금', room: 'A', time: '14:00~16:00', start: '2026-07-09', end: '2026-07-22' },
+  { subject: '스케치업1/방학', days: '월화수목금', room: 'A', time: '16:00~18:00', start: '2026-07-09', end: '2026-07-22' },
+  { subject: '캐드2/방학', days: '월화수목금', room: 'A', time: '14:00~16:00', start: '2026-07-23', end: '2026-08-04' },
+  { subject: '스케치업2/방학', days: '월화수목금', room: 'A', time: '16:00~18:00', start: '2026-07-23', end: '2026-08-04' },
+  { subject: 'BIM1/방학', days: '월화수목금', room: 'A', time: '14:00~16:00', start: '2026-08-05', end: '2026-08-18' },
+  { subject: '모션PO', days: '화목화목금', room: 'A', time: '19:00~22:00', start: '2026-07-14', end: '2026-08-06' },
+  { subject: '어드벤스 시포디1', days: '월수금월수', room: 'A', time: '19:00~22:00', start: '2026-07-15', end: '2026-08-05' },
+  // B강의장
+  { subject: '모션 디드', days: '화목화목금', room: 'B', time: '09:00~11:00', start: '2026-07-14', end: '2026-08-06' },
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '09:00~11:00', start: '2026-07-15', end: '2026-08-05' },
+  { subject: '디지털드로잉', days: '화목화목금', room: 'B', time: '11:00~13:00', start: '2026-07-14', end: '2026-08-06' },
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '11:00~13:00', start: '2026-07-15', end: '2026-08-05' },
+  { subject: '디지털드로잉', days: '화목화목금', room: 'B', time: '14:00~16:00', start: '2026-07-14', end: '2026-08-06' },
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '14:00~16:00', start: '2026-07-15', end: '2026-08-05' },
+  { subject: 'AI프롬프트엔지니어링1', days: '월화수목금', room: 'B', time: '16:00~18:00', start: '2026-08-07', end: '2026-08-19' },
+  { subject: '디지털드로잉', days: '화목화목금', room: 'B', time: '18:00~20:00', start: '2026-07-14', end: '2026-08-06' },
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '18:00~20:00', start: '2026-07-15', end: '2026-08-05' },
+  { subject: '디지털드로잉', days: '화목화목금', room: 'B', time: '20:00~22:00', start: '2026-07-14', end: '2026-08-06' },
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '20:00~22:00', start: '2026-07-15', end: '2026-08-05' },
+  // C강의장
+  { subject: '프리미어', days: '월화수목', room: 'C', time: '11:00~13:00', start: '2026-07-14', end: '2026-08-10' },
+  { subject: '모에펙', days: '금', room: 'C', time: '11:00~13:00', start: '2026-07-17', end: '2026-08-07' },
+  { subject: '컴활/방학', days: '월화수목금', room: 'C', time: '14:00~16:00', start: '2026-06-26', end: '2026-07-16' },
+  { subject: '모스/방학', days: '월화수목금', room: 'C', time: '14:00~16:00', start: '2026-07-20', end: '2026-08-07' },
+  { subject: '컴활/방학', days: '월화수목금', room: 'C', time: '14:00~16:00', start: '2026-08-10', end: '2026-08-31' },
+  { subject: '모스/방학', days: '월화수목금', room: 'C', time: '16:00~18:00', start: '2026-08-10', end: '2026-08-31' },
+  { subject: '에펙2', days: '화목화목금', room: 'C', time: '19:00~22:00', start: '2026-07-14', end: '2026-08-06' },
+  { subject: '마야8', days: '월수금월수', room: 'C', time: '19:00~22:00', start: '2026-07-15', end: '2026-08-05' },
+  // D강의장
+  { subject: '스케치업3', days: '월화수목', room: 'D', time: '09:00~11:00', start: '2026-07-14', end: '2026-08-10' },
+  { subject: '캐드1', days: '월화수목', room: 'D', time: '11:00~13:00', start: '2026-07-14', end: '2026-08-10' },
+  { subject: '포토샵1/방학', days: '월화수목금', room: 'D', time: '13:30~15:00', start: '2026-07-24', end: '2026-08-06' },
+  { subject: '일러스트1/방학', days: '월화수목금', room: 'D', time: '15:00~16:30', start: '2026-07-24', end: '2026-08-06' },
+  { subject: '프리미어/방학', days: '월화수목금', room: 'D', time: '16:30~18:00', start: '2026-07-01', end: '2026-07-23' },
+  { subject: '에펙1/방학', days: '월화수목금', room: 'D', time: '16:30~18:00', start: '2026-07-24', end: '2026-08-11' },
+  { subject: '포토샵2/방학', days: '월화수목금', room: 'D', time: '13:30~15:00', start: '2026-08-07', end: '2026-08-21' },
+  { subject: '일러스트2/방학', days: '월화수목금', room: 'D', time: '15:00~16:30', start: '2026-08-07', end: '2026-08-21' },
+  { subject: '백엔드마스터7(스프링부트2)', days: '화목화목금', room: 'D', time: '19:00~22:00', start: '2026-07-14', end: '2026-08-06' },
+  { subject: '캐드2', days: '월수금월수', room: 'D', time: '19:00~22:00', start: '2026-07-15', end: '2026-08-05' },
+  // E강의장
+  { subject: '시포디1', days: '월화수목', room: 'C', time: '09:00~11:00', start: '2026-07-14', end: '2026-08-10' },
+  { subject: 'AI 캐릭터 피규어 제작 세미나', days: '화', room: 'E', time: '11:00~13:00', start: '2026-07-28', end: '2026-07-28' },
+  { subject: '마야PO', days: '화목화목금', room: 'E', time: '14:00~16:00', start: '2026-07-14', end: '2026-08-06' },
+  { subject: '마야3', days: '월수금월수', room: 'E', time: '14:00~16:00', start: '2026-07-15', end: '2026-08-05' },
+  { subject: '스케치업1', days: '화목화목금', room: 'E', time: '19:00~22:00', start: '2026-07-14', end: '2026-08-06' },
+  { subject: '포토샵', days: '월수금월수', room: 'E', time: '19:00~22:00', start: '2026-07-15', end: '2026-08-05' },
+  // F강의장
+  { subject: '실전OA1', days: '월수금', room: 'F', time: '11:00~13:00', start: '2026-06-24', end: '2026-07-20' },
+  { subject: 'AI에이전트1', days: '화목', room: 'F', time: '11:00~13:00', start: '2026-06-25', end: '2026-07-23' },
+  { subject: '실전OA2', days: '월수금', room: 'F', time: '11:00~13:00', start: '2026-07-22', end: '2026-08-17' },
+  { subject: 'AI에이전트2', days: '화목', room: 'F', time: '11:00~13:00', start: '2026-07-28', end: '2026-08-20' },
+  { subject: 'UI/UX디자인2', days: '화목화목금', room: 'F', time: '14:00~16:00', start: '2026-07-14', end: '2026-08-07' },
+  { subject: '플랫모션', days: '월수금월수', room: 'F', time: '14:00~16:00', start: '2026-07-15', end: '2026-08-10' },
+  { subject: '인테리어PO', days: '화목화목금', room: 'F', time: '16:00~18:00', start: '2026-07-14', end: '2026-08-07' },
+  { subject: '웹3', days: '월수금월수', room: 'F', time: '19:00~22:00', start: '2026-06-17', end: '2026-07-15' },
+  { subject: '마야PO', days: '화목화목금', room: 'F', time: '19:00~22:00', start: '2026-07-14', end: '2026-08-06' },
+  { subject: '웹4', days: '월수금월수', room: 'F', time: '19:00~22:00', start: '2026-07-17', end: '2026-08-07' },
+  // G강의장
+  { subject: 'AI 2D디자인', days: '금', room: 'G', time: '09:00~11:00', start: '2026-06-12', end: '2026-07-31' },
+  { subject: '디일러', days: '월화수목', room: 'G', time: '11:00~13:00', start: '2026-07-14', end: '2026-08-10' },
+  { subject: '파이썬1/방학', days: '월화수목금', room: 'G', time: '14:00~16:00', start: '2026-07-22', end: '2026-08-06' },
+  { subject: '파이썬2/방학', days: '월화수목금', room: 'G', time: '14:00~16:00', start: '2026-08-07', end: '2026-08-25' },
+  { subject: '2026년 미래유망(경일고)', days: '수목금', room: 'G', time: '16:00~18:00', start: '2026-04-08', end: '2026-10-08' },
+  { subject: '디일러', days: '화목화목금', room: 'G', time: '19:00~22:00', start: '2026-07-14', end: '2026-08-06' },
+  { subject: '컴활', days: '월수금월수', room: 'G', time: '19:00~22:00', start: '2026-07-15', end: '2026-08-05' },
+  // H강의장
+  { subject: '실내건축 자격증(기사)', days: '화목화목금', room: 'H', time: '11:00~13:00', start: '2026-07-14', end: '2026-08-06' },
+  { subject: 'AI 영상디자인', days: '월수', room: 'H', time: '14:00~16:00', start: '2026-07-15', end: '2026-08-10' },
+  { subject: '발상과표현', days: '월수금월수', room: 'H', time: '16:00~18:00', start: '2026-07-20', end: '2026-08-10' },
+  { subject: '해부학', days: '화목화목금', room: 'H', time: '16:00~18:00', start: '2026-07-21', end: '2026-08-07' },
+  { subject: '실내건축 자격증(기사)', days: '화목화목금', room: 'H', time: '19:00~22:00', start: '2026-07-14', end: '2026-08-06' },
+  { subject: '실내건축 자격증(기능사)', days: '월수금월수', room: 'H', time: '19:00~22:00', start: '2026-07-15', end: '2026-08-05' },
+];
+
+const weekend7Courses = [
+  // A강의장
+  { subject: '포토샵', days: '토/일', room: 'A', time: '12:00~15:00', start: '2026-07-11', end: '2026-08-02' },
+  // B강의장
+  { subject: '디지털드로잉', days: '토/일', room: 'B', time: '09:00~12:00', start: '2026-07-11', end: '2026-08-02' },
+  { subject: '디지털드로잉', days: '토/일', room: 'B', time: '12:00~15:00', start: '2026-07-11', end: '2026-08-02' },
+  // C강의장
+  { subject: 'GTQI', days: '토/일', room: 'C', time: '09:00~12:00', start: '2026-07-04', end: '2026-07-26' },
+  { subject: 'GTQ', days: '토/일', room: 'C', time: '09:00~12:00', start: '2026-08-01', end: '2026-08-30' },
+  { subject: '컴활/5주', days: '토/일', room: 'C', time: '12:00~15:00', start: '2026-06-13', end: '2026-07-12' },
+  { subject: '모스', days: '토/일', room: 'C', time: '12:00~15:00', start: '2026-07-18', end: '2026-08-09' },
+  { subject: 'AI프롬프트엔지니어링1', days: '토/일', room: 'C', time: '15:00~18:00', start: '2026-07-04', end: '2026-07-19' },
+  { subject: 'AI프롬프트엔지니어링2', days: '토/일', room: 'C', time: '15:00~18:00', start: '2026-07-25', end: '2026-08-09' },
+  // D강의장
+  { subject: 'C언어2', days: '토/일', room: 'D', time: '09:00~12:00', start: '2026-06-20', end: '2026-07-19' },
+  { subject: '스케치업1', days: '토/일', room: 'D', time: '12:00~15:00', start: '2026-07-11', end: '2026-08-02' },
+  // E강의장
+  { subject: '유크리기초', days: '토/일', room: 'E', time: '09:00~12:00', start: '2026-07-11', end: '2026-08-02' },
+  { subject: '유크리심화', days: '토/일', room: 'E', time: '12:00~15:00', start: '2026-07-11', end: '2026-08-02' },
+  { subject: '캐드1', days: '토/일', room: 'E', time: '15:00~18:00', start: '2026-07-11', end: '2026-08-02' },
+  // F강의장
+  { subject: '전산회계1급', days: '토/일', room: 'F', time: '12:00~15:00', start: '2026-06-06', end: '2026-07-26' },
+  { subject: '전산회계1급', days: '토/일', room: 'F', time: '12:00~15:00', start: '2026-08-01', end: '2026-10-11' },
+  { subject: '전산세무2급', days: '토/일', room: 'F', time: '15:00~18:00', start: '2026-06-06', end: '2026-07-26' },
+  // G강의장
+  { subject: '전산응용기계제도', days: '토/일', room: 'G', time: '09:00~13:00', start: '2026-07-11', end: '2026-08-23' },
+  // H강의장
+  { subject: '컬러리스트-실기', days: '토/일', room: 'H', time: '13:00~16:00', start: '2026-06-20', end: '2026-07-12' },
+];
+
+const weekday8Rooms = ['A','B','C','D','E','F','G','H'];
+const weekend8Rooms = ['A','B','C','D','E','F','G'];
+
+const weekday8Courses = [
+  // A강의장
+  { subject: '일러스트', days: '월화수목', room: 'A', time: '09:00~11:00', start: '2026-08-12', end: '2026-09-09' },
+  { subject: '포토샵', days: '월화수목', room: 'A', time: '11:00~13:00', start: '2026-08-12', end: '2026-09-09' },
+  { subject: 'BIM1/방학', days: '월화수목금', room: 'A', time: '14:00~16:00', start: '2026-08-05', end: '2026-08-18' },
+  { subject: 'BIM2/방학', days: '월화수목금', room: 'A', time: '14:00~16:00', start: '2026-08-19', end: '2026-08-31' },
+  { subject: 'AI프롬프트엔지니어링1', days: '월화수목금', room: 'A', time: '16:00~18:00', start: '2026-08-07', end: '2026-08-19' },
+  { subject: 'AI프롬프트엔지니어링2', days: '월화수목금', room: 'A', time: '16:00~18:00', start: '2026-08-20', end: '2026-08-31' },
+  { subject: '어드벤스 시포디2', days: '월수금월수', room: 'A', time: '19:00~22:00', start: '2026-08-12', end: '2026-09-07' },
+  { subject: '모션PO', days: '화목화목금', room: 'A', time: '19:00~22:00', start: '2026-08-13', end: '2026-09-03' },
+  // B강의장
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '09:00~11:00', start: '2026-08-12', end: '2026-09-07' },
+  { subject: '모션 디드', days: '화목화목금', room: 'B', time: '09:00~11:00', start: '2026-08-13', end: '2026-09-03' },
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '11:00~13:00', start: '2026-08-12', end: '2026-09-07' },
+  { subject: '디지털드로잉', days: '화목화목금', room: 'B', time: '11:00~13:00', start: '2026-08-13', end: '2026-09-03' },
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '14:00~16:00', start: '2026-08-12', end: '2026-09-07' },
+  { subject: '디지털드로잉', days: '화목화목금', room: 'B', time: '14:00~16:00', start: '2026-08-13', end: '2026-09-03' },
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '18:00~20:00', start: '2026-08-12', end: '2026-09-07' },
+  { subject: '디지털드로잉', days: '화목화목금', room: 'B', time: '18:00~20:00', start: '2026-08-13', end: '2026-09-03' },
+  { subject: '디지털드로잉', days: '월수금월수', room: 'B', time: '20:00~22:00', start: '2026-08-12', end: '2026-09-07' },
+  { subject: '디지털드로잉', days: '화목화목금', room: 'B', time: '20:00~22:00', start: '2026-08-13', end: '2026-09-03' },
+  // C강의장
+  { subject: '에펙1', days: '월화수목금', room: 'C', time: '11:00~13:00', start: '2026-08-12', end: '2026-09-09' },
+  { subject: '프리미어심화', days: '금', room: 'C', time: '11:00~13:00', start: '2026-08-14', end: '2026-09-04' },
+  { subject: '컴활/방학', days: '월화수목금', room: 'C', time: '14:00~16:00', start: '2026-08-10', end: '2026-08-31' },
+  { subject: '모스/방학', days: '월화수목금', room: 'C', time: '16:00~18:00', start: '2026-08-10', end: '2026-08-31' },
+  { subject: '마야1', days: '월수금월수', room: 'C', time: '19:00~22:00', start: '2026-08-12', end: '2026-09-07' },
+  { subject: '프리미어', days: '화목화목금', room: 'C', time: '19:00~22:00', start: '2026-08-13', end: '2026-09-03' },
+  // D강의장
+  { subject: '스케치업1', days: '월화수목', room: 'D', time: '09:00~11:00', start: '2026-08-12', end: '2026-09-09' },
+  { subject: '캐드2', days: '월화수목', room: 'D', time: '11:00~13:00', start: '2026-08-12', end: '2026-09-09' },
+  { subject: '포토샵2/방학', days: '월화수목금', room: 'D', time: '13:30~15:00', start: '2026-08-07', end: '2026-08-21' },
+  { subject: '일러스트2/방학', days: '월화수목금', room: 'D', time: '15:00~16:30', start: '2026-08-07', end: '2026-08-21' },
+  { subject: '에펙2/방학', days: '월화수목금', room: 'D', time: '16:30~18:00', start: '2026-08-12', end: '2026-08-31' },
+  { subject: '캐드1', days: '월수금월수', room: 'D', time: '19:00~22:00', start: '2026-08-12', end: '2026-09-07' },
+  // E강의장
+  { subject: '시포디2', days: '월화수목금', room: 'E', time: '09:00~11:00', start: '2026-08-12', end: '2026-09-09' },
+  { subject: '마야4', days: '월수금월수', room: 'E', time: '14:00~16:00', start: '2026-08-12', end: '2026-09-07' },
+  { subject: '마야PO', days: '화목화목금', room: 'E', time: '14:00~16:00', start: '2026-08-13', end: '2026-09-03' },
+  { subject: '일러스트', days: '월수금월수', room: 'E', time: '19:00~22:00', start: '2026-08-12', end: '2026-09-07' },
+  { subject: '스케치업2', days: '화목화목금', room: 'E', time: '19:00~22:00', start: '2026-08-13', end: '2026-09-03' },
+  // F강의장
+  { subject: 'AI에이전트2', days: '화목', room: 'F', time: '11:00~13:00', start: '2026-07-28', end: '2026-08-20' },
+  { subject: '인디자인', days: '월수금월수', room: 'F', time: '14:00~16:00', start: '2026-08-12', end: '2026-09-09' },
+  { subject: '그래픽아트웍', days: '화목화목금', room: 'F', time: '14:00~16:00', start: '2026-08-13', end: '2026-09-08' },
+  { subject: '편집PO', days: '월수금월수', room: 'F', time: '16:00~18:00', start: '2026-08-12', end: '2026-09-09' },
+  { subject: '인테리어PO', days: '화목화목금', room: 'F', time: '16:00~18:00', start: '2026-08-13', end: '2026-09-08' },
+  { subject: '마야PO', days: '화목화목금', room: 'F', time: '19:00~22:00', start: '2026-08-13', end: '2026-09-03' },
+  // G강의장
+  { subject: '포토웍스', days: '월화수목', room: 'G', time: '09:00~11:00', start: '2026-08-12', end: '2026-09-09' },
+  { subject: '디일러', days: '월화수목', room: 'G', time: '11:00~13:00', start: '2026-08-12', end: '2026-09-09' },
+  { subject: '2026년 미래유망(경일고)', days: '수목금', room: 'G', time: '16:00~18:00', start: '2026-04-08', end: '2026-10-08' },
+  { subject: '모스', days: '월수금월수', room: 'G', time: '19:00~22:00', start: '2026-08-12', end: '2026-09-07' },
+  { subject: '포토웍스', days: '화목화목금', room: 'G', time: '19:00~22:00', start: '2026-08-13', end: '2026-09-03' },
+  // H강의장
+  { subject: '실내건축 자격증(기능사)', days: '월수금월수', room: 'H', time: '11:00~13:00', start: '2026-08-12', end: '2026-09-07' },
+  { subject: '실내건축 자격증(기사)', days: '화목화목금', room: 'H', time: '11:00~13:00', start: '2026-08-13', end: '2026-09-03' },
+  { subject: '파이썬2/방학', days: '월화수목금', room: 'H', time: '14:00~16:00', start: '2026-08-07', end: '2026-08-25' },
+  { subject: 'AI크리에이터 인테리어', days: '월수', room: 'H', time: '16:00~18:00', start: '2026-08-12', end: '2026-09-09' },
+  { subject: '실내건축 자격증(기능사)', days: '월수금월수', room: 'H', time: '19:00~22:00', start: '2026-08-12', end: '2026-09-07' },
+  { subject: '실내건축 자격증(기사)', days: '화목화목금', room: 'H', time: '19:00~22:00', start: '2026-08-13', end: '2026-09-03' },
+];
+
+const weekend8Courses = [
+  // A강의장
+  { subject: '일러스트', days: '토/일', room: 'A', time: '12:00~15:00', start: '2026-08-08', end: '2026-09-06' },
+  // B강의장
+  { subject: '디지털드로잉', days: '토/일', room: 'B', time: '09:00~12:00', start: '2026-08-08', end: '2026-09-06' },
+  { subject: '디지털드로잉', days: '토/일', room: 'B', time: '12:00~15:00', start: '2026-08-08', end: '2026-09-06' },
+  // C강의장
+  { subject: 'GTQ', days: '토/일', room: 'C', time: '09:00~12:00', start: '2026-08-01', end: '2026-08-30' },
+  { subject: 'GTQI', days: '토/일', room: 'C', time: '09:00~12:00', start: '2026-09-05', end: '2026-10-11' },
+  { subject: '모스', days: '토/일', room: 'C', time: '12:00~15:00', start: '2026-07-18', end: '2026-08-09' },
+  { subject: '모스', days: '토/일', room: 'C', time: '12:00~15:00', start: '2026-08-22', end: '2026-09-20' },
+  { subject: 'AI프롬프트엔지니어링2', days: '토/일', room: 'C', time: '15:00~18:00', start: '2026-07-25', end: '2026-08-09' },
+  { subject: '실전OA1', days: '토/일', room: 'C', time: '15:00~18:00', start: '2026-08-22', end: '2026-09-13' },
+  // D강의장
+  { subject: 'AI에이전트1', days: '토/일', room: 'D', time: '09:00~12:00', start: '2026-07-25', end: '2026-08-23' },
+  { subject: 'AI에이전트2', days: '토/일', room: 'D', time: '09:00~12:00', start: '2026-08-29', end: '2026-09-20' },
+  { subject: '스케치업1', days: '토/일', room: 'D', time: '12:00~15:00', start: '2026-07-18', end: '2026-08-09' },
+  { subject: '스케치업2', days: '토/일', room: 'D', time: '12:00~15:00', start: '2026-08-22', end: '2026-09-13' },
+  // E강의장
+  { subject: '유크리기초', days: '토/일', room: 'E', time: '09:00~12:00', start: '2026-08-08', end: '2026-09-06' },
+  { subject: 'AI크리에이터 유튜브', days: '토/일', room: 'E', time: '12:00~15:00', start: '2026-08-08', end: '2026-09-06' },
+  { subject: '캐드1', days: '토/일', room: 'E', time: '15:00~18:00', start: '2026-07-18', end: '2026-08-09' },
+  { subject: '캐드2', days: '토/일', room: 'E', time: '15:00~18:00', start: '2026-08-22', end: '2026-09-13' },
+  // F강의장
+  { subject: '전산회계1급', days: '토/일', room: 'F', time: '12:00~15:00', start: '2026-08-01', end: '2026-09-20' },
+  // G강의장
+  { subject: '전산응용기계제도', days: '토/일', room: 'G', time: '09:00~13:00', start: '2026-07-11', end: '2026-08-23' },
+  { subject: '전산응용건축제도', days: '토/일', room: 'G', time: '13:00~17:00', start: '2026-07-25', end: '2026-08-23' },
+];
+
+let currentMode = 'weekday8';
+let currentFilter = 'all';
+
+function getCourses() {
+  if (currentMode === 'weekday3') return weekdayCourses;
+  if (currentMode === 'weekend3') return weekendCourses;
+  if (currentMode === 'weekday4') return weekday4Courses;
+  if (currentMode === 'weekend4') return weekend4Courses;
+  if (currentMode === 'weekday7') return weekday7Courses;
+  if (currentMode === 'weekend7') return weekend7Courses;
+  if (currentMode === 'weekday8') return weekday8Courses;
+  if (currentMode === 'weekend8') return weekend8Courses;
+}
+function getRooms() {
+  if (currentMode === 'weekday3') return weekdayRooms;
+  if (currentMode === 'weekend3') return weekendRooms;
+  if (currentMode === 'weekday4') return weekday4Rooms;
+  if (currentMode === 'weekend4') return weekend4Rooms;
+  if (currentMode === 'weekday7') return weekday7Rooms;
+  if (currentMode === 'weekend7') return weekend7Rooms;
+  if (currentMode === 'weekday8') return weekday8Rooms;
+  if (currentMode === 'weekend8') return weekend8Rooms;
+}
+
+function fmt(dateStr) {
+  const [,m,d] = dateStr.split('-');
+  return `${m}.${d}`;
+}
+
+const HEADER = `격일시간표 등 공지사항 필수확인\n▶ sbs-ansan-notice.co.kr\n\n`;
+const FOOTER = `\n학원 소식을 인스타 팔로우 후 확인해보세요 :D\n▶ instagram.com/sbsacademy_ansan\n\n★ 개강안내 확인 후 답변 부탁 드립니다!`;
+
+function makeBody(c) {
+  return `· 수강과목 : ${c.subject}(${c.days})\n· 개강일 : ${fmt(c.start)}\n· 종강일 : ${fmt(c.end)}\n· 수강시간 : ${c.time}\n· 강의실 : 3층 ${c.room}강의장\n· 비대면링크 : ${discord[c.room]}\n· 대면/비대면 : 대면\n· 특이사항 : -\n`;
+}
+
+function makeMsg(c) {
+  return `■ SBS아카데미안산 개강안내 ■\n\n` + makeBody(c);
+}
+
+function setMode(mode, btn) {
+  currentMode = mode;
+  currentFilter = 'all';
+  document.querySelectorAll('.mode-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderFilterBtns();
+  render();
+}
+
+function setFilter(room, btn) {
+  currentFilter = room;
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function renderFilterBtns() {
+  const wrap = document.getElementById('filterBtns');
+  const rooms = getRooms();
+  wrap.innerHTML = `
+    <button class="fbtn ${currentFilter==='all'?'active':''}" onclick="setFilter('all',this)">전체</button>
+    ${rooms.map(r => `<button class="fbtn ${currentFilter===r?'active':''}" onclick="setFilter('${r}',this)">${r}강의장</button>`).join('')}
+  `;
+}
+
+function getFiltered() {
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  return getCourses().filter(c => {
+    const rMatch = currentFilter === 'all' || c.room === currentFilter;
+    const sMatch = !q || c.subject.toLowerCase().includes(q);
+    return rMatch && sMatch;
+  });
+}
+
+function copyText(text, btn) {
+  navigator.clipboard.writeText(HEADER + text + FOOTER).then(() => {
+    btn.textContent = '✓ 복사됨!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 복사하기'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+function copyAll(btn) {
+  const filtered = getFiltered();
+  if (!filtered.length) return;
+  const body = makeMsg(filtered[0]) + filtered.slice(1).map(c => '\n──────────────────\n\n' + makeBody(c)).join('');
+  const all = HEADER + body + FOOTER;
+  navigator.clipboard.writeText(all).then(() => {
+    btn.textContent = '✓ 전체 복사됨!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 전체 복사'; btn.classList.remove('copied'); }, 2500);
+  });
+}
+
+function render() {
+  const filtered = getFiltered();
+  document.getElementById('visibleCount').textContent = filtered.length;
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="no-result">검색 결과가 없습니다</div>';
+    return;
+  }
+
+  filtered.forEach(c => {
+    const msg = makeMsg(c);
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.innerHTML = `
+      <div class="card-top">
+        <div>
+          <div class="card-subject">${c.subject}</div>
+          <div class="card-days">${c.days} | ${c.time}</div>
+        </div>
+        <div class="room-tag">${c.room}강의장</div>
+      </div>
+      <div class="card-body">
+        <div class="info"><span class="info-k">· 개강일</span><span class="info-v">${fmt(c.start)}</span></div>
+        <div class="info"><span class="info-k">· 종강일</span><span class="info-v">${fmt(c.end)}</span></div>
+        <div class="info"><span class="info-k">· 수강시간</span><span class="info-v">${c.time}</span></div>
+        <div class="info"><span class="info-k">· 강의실</span><span class="info-v">3층 ${c.room}강의장</span></div>
+        <div class="info"><span class="info-k">· 비대면링크</span><span class="info-v"><a href="${discord[c.room]}" target="_blank">${discord[c.room]}</a></span></div>
+        <div class="info"><span class="info-k">· 대면여부</span><span class="info-v">대면</span></div>
+        <button class="copy-btn" onclick="copyText(this.dataset.msg, this)" data-msg="${msg.replace(/"/g, '&quot;')}">📋 복사하기</button>
+      </div>
+    `;
+    div.dataset.msg = msg;
+    if (multiMode) div.classList.add('selectable');
+    if (multiMode && selectedMsgs.has(msg)) div.classList.add('selected');
+    div.addEventListener('click', (e) => {
+      if (!multiMode) return;
+      if (e.target.closest('.copy-btn')) return;
+      if (selectedMsgs.has(msg)) {
+        selectedMsgs.delete(msg);
+        div.classList.remove('selected');
+      } else {
+        selectedMsgs.add(msg);
+        div.classList.add('selected');
+      }
+      updateSelCount();
+    });
+    grid.appendChild(div);
+  });
+}
+
+// 다중선택
+let multiMode = false;
+const selectedMsgs = new Set();
+
+renderFilterBtns();
+render();
+
+function toggleMulti() {
+  multiMode = !multiMode;
+  const btn = document.getElementById('multiBtn');
+  btn.classList.toggle('active', multiMode);
+  btn.textContent = multiMode ? '✕ 선택 종료' : '☑️ 다중선택';
+  if (!multiMode) {
+    selectedMsgs.clear();
+    updateSelCount();
+  }
+  render();
+}
+function updateSelCount() {
+  const sel = selectedMsgs.size;
+  document.getElementById('selCount').textContent = sel;
+  document.getElementById('multiBar').classList.toggle('visible', sel > 0);
+}
+function clearSelection() {
+  selectedMsgs.clear();
+  document.querySelectorAll('.card.selected').forEach(c => c.classList.remove('selected'));
+  updateSelCount();
+}
+function copySelected(btn) {
+  const msgs = [...selectedMsgs];
+  if (!msgs.length) return;
+  const body = msgs[0] + msgs.slice(1).map(m => '\n──────────────────\n\n' + m.replace(/^■ SBS아카데미안산 개강안내 ■\n\n/, '')).join('');
+  navigator.clipboard.writeText(HEADER + body + FOOTER).then(() => {
+    btn.textContent = '✓ 복사됨!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 선택 복사'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>
